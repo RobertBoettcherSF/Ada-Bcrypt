@@ -1,5 +1,3 @@
-with Interfaces;
-
 package Bcrypt with Preelaborate is
 
    --  Strong typing for domain-specific parameters
