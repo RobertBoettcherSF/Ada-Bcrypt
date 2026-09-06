@@ -1,9 +1,11 @@
+with Interfaces;
+
 package body Bcrypt is
 
    type Byte is mod 2**8;
    type Byte_Array is array (Natural range <>) of Byte;
 
-   type Word32 is new Interfaces.Unsigned_32;
+   subtype Word32 is Interfaces.Unsigned_32;
 
    type P_Array is array (0 .. 17) of Word32;
    type S_Array is array (0 .. 3, 0 .. 255) of Word32;
@@ -221,7 +223,7 @@ package body Bcrypt is
       Ctx        : Context;
       Salt_Bytes : constant Byte_Array := Decode_Base64 (Salt, 16);
       Key_Bytes  : constant Byte_Array := To_Byte_Array (Password);
-      Rounds     : constant Word32 := Interfaces.Shift_Left (1, Natural (Cost));
+      Rounds     : constant Word32 := Interfaces.Shift_Left (Word32 (1), Natural (Cost));
       
       --  Magic string blocks
       Ctext : array (0 .. 5) of Word32 := [others => 0];
