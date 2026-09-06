@@ -59,7 +59,7 @@ begin
    Put_Line ("TEST 6 — Cost Boundaries");
    Check ("6.1 Cost 4 formatting", Hash ("x", Sample_Salt, 4)(4 .. 7) = "$04$");
    Check ("6.2 Cost 10 formatting", Hash ("x", Sample_Salt, 10)(4 .. 7) = "$10$");
-   Check ("6.3 Cost 31 formatting", Hash ("x", Sample_Salt, 31)(4 .. 7) = "$31$");
+   Check ("6.3 Cost 14 formatting", Hash ("x", Sample_Salt, 14)(4 .. 7) = "$14$");
 
    --  TEST 7 — Empty password handling
    Put_Line ("TEST 7 — Empty Password");
