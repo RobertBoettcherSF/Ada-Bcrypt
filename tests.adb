@@ -109,12 +109,10 @@ begin
    --  TEST 11 — Invalid hash structure handling
    Put_Line ("TEST 11 — Invalid Structures");
    declare
-      Bad_Length  : constant String := "$2b$04$TooShort";
       Bad_Version : constant Hash_String := "$9z$04$12345678901234567890123456789012345678901234567890123";
-      Bad_Seps    : constant Hash_String := "2b_04_12345678901234567890123456789012345678901234567890123";
+      Bad_Seps    : constant Hash_String := "2b_04_123456789012345678901234567890123456789012345678901234";
    begin
       Check ("11.1 Rejects wrong length (compilation logic constraint checked implicitly)", True);
-      --  String bounds exceptions natively prevent calling Verify with Bad_Length
       Check ("11.2 Rejects unknown version prefix", not Verify ("test", Bad_Version));
       Check ("11.3 Rejects missing structural $ separators", not Verify ("test", Bad_Seps));
    end;
@@ -129,7 +127,7 @@ begin
       
       begin
          declare
-            Res : Boolean := Verify ("MyPassword", Bad_Hash);
+            Res : constant Boolean := Verify ("MyPassword", Bad_Hash);
          begin
             Check ("12.1 Verify should return false or raise exception on bad Base64", not Res);
          end;
@@ -144,13 +142,9 @@ begin
 
    --  TEST 13 — Extreme inputs safely rejected
    Put_Line ("TEST 13 — Edge Cases & Limits");
-   declare
-      Too_Long_Pass : constant String (1 .. 73) := [others => 'X'];
-   begin
-      Check ("13.1 Pre-condition correctly restricts password > 72 (implied by type bounds)", True);
-      Check ("13.2 Pre-condition correctly restricts raw salt != 16", True);
-      Check ("13.3 Test framework operational limits confirmed", True);
-   end;
+   Check ("13.1 Pre-condition correctly restricts password > 72 (implied by type bounds)", True);
+   Check ("13.2 Pre-condition correctly restricts raw salt != 16", True);
+   Check ("13.3 Test framework operational limits confirmed", True);
 
    Put_Line ("");
    Put_Line ("=== " & Natural'Image (Pass_Count) & " passed, "
