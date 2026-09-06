@@ -40,15 +40,15 @@ package body Bcrypt is
       for B of Data loop
          Acc  := Interfaces.Shift_Left (Acc, 8) or Word32 (B);
          Bits := @ + 8;
-         while Bits >= 6 and Out_Idx <= Expected_Len loop
+         while Bits >= 6 and then Out_Idx <= Expected_Len loop
             Bits := @ - 6;
-            Res (Out_Idx) := Bcrypt_Base64_Alphabet (Positive (Interfaces.Shift_Right (Acc, Bits) and 16#3F#) + 1);
+            Res (Out_Idx) := Bcrypt_Base64_Alphabet (Natural (Interfaces.Shift_Right (Acc, Bits) and 16#3F#) + 1);
             Out_Idx := @ + 1;
          end loop;
       end loop;
       
-      if Bits > 0 and Out_Idx <= Expected_Len then
-         Res (Out_Idx) := Bcrypt_Base64_Alphabet (Positive (Interfaces.Shift_Left (Acc, 6 - Bits) and 16#3F#) + 1);
+      if Bits > 0 and then Out_Idx <= Expected_Len then
+         Res (Out_Idx) := Bcrypt_Base64_Alphabet (Natural (Interfaces.Shift_Left (Acc, 6 - Bits) and 16#3F#) + 1);
       end if;
       return Res;
    end Encode_Base64;
