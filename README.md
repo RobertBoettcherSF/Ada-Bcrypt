@@ -1,4 +1,3 @@
-````
 # Ada 2023 Bcrypt Implementation
 
 ## Project Overview
@@ -17,13 +16,11 @@ This repository contains a full, standalone, cleanly compiling Ada 2023 implemen
 To build and run the test suite:
 ```bash
 make test
-````
+```
 
 Expected output:
 
-Plaintext
-
-```
+```text
 Running tests...
 --- Bcrypt Test Suite ---
 TEST 1 — Encode_Salt
@@ -33,15 +30,11 @@ TEST 1 — Encode_Salt
 ```
 
 ## Testing
-
 The `tests.adb` program serves as both the test suite and usage example. It covers:
 
--   **Functional Correctness:** Ensures valid passwords succeed and format blocks parse logically.
-
--   **Boundary Encoding:** Asserts cost values encode exactly as per Bcrypt spec (e.g., `<10` padding).
-
--   **Edge Cases:** Validates empty passwords, maximum boundaries (72 characters), and Base64 charset resilience.
-
--   **Error Handling:** Identifies bad prefixes, injected bad characters, and maliciously short inputs.
+- **Functional Correctness:** Ensures valid passwords succeed and format blocks parse logically.
+- **Boundary Encoding:** Asserts cost values encode exactly as per Bcrypt spec (e.g., <10 padding).
+- **Edge Cases:** Validates empty passwords, maximum boundaries (72 characters), and Base64 charset resilience.
+- **Error Handling:** Identifies bad prefixes, injected bad characters, and maliciously short inputs.
 
 These criteria guarantee strong verification and validation limits.
