@@ -5,10 +5,13 @@ package body Bcrypt is
 
    type Word32 is new Interfaces.Unsigned_32;
 
+   type P_Array is array (0 .. 17) of Word32;
+   type S_Array is array (0 .. 3, 0 .. 255) of Word32;
+
    --  Blowfish context (Eksblowfish state)
    type Context is record
-      P : array (0 .. 17) of Word32;
-      S : array (0 .. 3, 0 .. 255) of Word32;
+      P : P_Array;
+      S : S_Array;
    end record;
 
    --  Bcrypt uses a custom Base64 alphabet
