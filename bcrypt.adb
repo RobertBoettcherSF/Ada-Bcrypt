@@ -6,6 +6,7 @@ package body Bcrypt is
    type Byte_Array is array (Natural range <>) of Byte;
 
    subtype Word32 is Interfaces.Unsigned_32;
+   use type Interfaces.Unsigned_32;
 
    type P_Array is array (0 .. 17) of Word32;
    type S_Array is array (0 .. 3, 0 .. 255) of Word32;
